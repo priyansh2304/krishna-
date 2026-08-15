@@ -6,7 +6,28 @@ window.onload = () => {
     const wishText = document.getElementById('birthday-wish');
     const cards = document.querySelectorAll('.mystery-card');
     const colors = ['#ff69b4', '#ff1493', '#b085ff', '#00f0ff', '#ffd700'];
-    
+
+    // 🎵 RESUME BACKGROUND MUSIC FROM FRAME 2
+    const bgAudio = document.getElementById("bgMusic");
+    const isMusicPlaying = localStorage.getItem("isMusicPlaying");
+
+    if (bgAudio && isMusicPlaying === "true") {
+        const savedTime = parseFloat(localStorage.getItem("musicCurrentTime")) || 0;
+        bgAudio.currentTime = savedTime;
+
+        bgAudio.play().catch(() => {
+            // Browser autoplay fallback on first tap
+            document.body.addEventListener("click", () => {
+                bgAudio.play();
+            }, { once: true });
+        });
+
+        // Continuously update timestamp
+        bgAudio.addEventListener("timeupdate", () => {
+            localStorage.setItem("musicCurrentTime", bgAudio.currentTime);
+        });
+    }
+
     // 1. RUN CELEBRATORY CONFETTI BURST IMMEDIATELY
     for (let i = 0; i < 80; i++) {
         spawnConfetti(canvas, colors);
@@ -108,6 +129,14 @@ function checkMilestoneUnlock() {
 }
 
 function goToFrame4() {
+    // 🛑 1. STOP BACKGROUND MUSIC & CLEAR STATE
+    const bgAudio = document.getElementById("bgMusic");
+    if (bgAudio) {
+        bgAudio.pause();
+    }
+    localStorage.setItem("isMusicPlaying", "false");
+
+    // 2. FADE OUT & TRANSITION TO FRAME 4
     document.body.style.transition = "opacity 1.5s ease";
     document.body.style.opacity = "0";
     setTimeout(() => {
