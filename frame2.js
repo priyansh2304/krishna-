@@ -1,51 +1,58 @@
 /**
  * Frame 2: The Launchpad Logic
- * Handles music initialization, UI changes, and the cinematic transition to Frame 3.
+ * Handles music initialization, audio sync, and the cinematic transition to Frame 3.
  */
 
+window.onload = () => {
+    const audio = document.getElementById("bgMusic");
+    
+    // Check if music was started in Frame 1 (or previously)
+    const isPlaying = localStorage.getItem("isMusicPlaying");
+    if (isPlaying === "true" && audio) {
+        const savedTime = parseFloat(localStorage.getItem("musicCurrentTime")) || 0;
+        audio.currentTime = savedTime;
+        audio.play().catch(e => console.log("Waiting for user tap to play audio:", e));
+    }
+
+    // Continuously sync timestamp to localStorage so Frame 3 picks up seamlessly
+    if (audio) {
+        audio.addEventListener("timeupdate", () => {
+            localStorage.setItem("musicCurrentTime", audio.currentTime);
+        });
+    }
+};
+
 function launchExperience() {
-    // 1. Grab our elements
     const audio = document.getElementById("bgMusic");
     const btn = document.getElementById("launchBtn");
 
-    // 2. Music Initialization
-    // We play the music here because the user has finally clicked/interacted.
+    // 1. Play audio immediately on button click
     if (audio) {
+        // Force audio to play from current position
         audio.play().then(() => {
-            // Success! Store the state so Frame 3 knows to keep the vibe going
             localStorage.setItem("isMusicPlaying", "true");
-            
-            // Sync the timestamp every 100ms so Frame 3 can pick up exactly where we left off
-            setInterval(() => {
-                localStorage.setItem("musicCurrentTime", audio.currentTime);
-            }, 100);
+            localStorage.setItem("musicCurrentTime", audio.currentTime);
         }).catch(error => {
-            // This usually happens if the audio file path is wrong or the file is missing
-            console.error("Music playback failed. Check your file path!", error);
+            console.error("Music playback failed:", error);
         });
     }
 
-    // 3. UI Feedback
-    // Make the button look like it's processing the request
+    // 2. Button UI Feedback
     btn.innerHTML = "Opening... 🎁";
     btn.style.opacity = "0.7";
-    btn.style.pointerEvents = "none"; // Prevents multiple clicks
+    btn.style.pointerEvents = "none";
 
-    // 4. The Cinematic Exit
-    // We wait 500ms so the user sees the button change, then we trigger the blur/fade
+    // 3. Cinematic Exit & Transition to Frame 3
     setTimeout(() => {
         document.body.classList.add("fade-out");
         
-        // 5. Final Redirect
-        // We wait for the CSS transition (1.2s) to finish before actually changing the page
+        // Final Redirect to Frame 3
         setTimeout(() => {
+            if (audio) {
+                localStorage.setItem("musicCurrentTime", audio.currentTime);
+            }
             window.location.href = "frame3.html";
         }, 1200);
         
     }, 500); 
 }
-
-// Optional: A small "fail-safe" to ensure the button is clickable as soon as the page loads
-window.onload = () => {
-    console.log("Frame 2 Ready. Waiting for user to unwrap the surprise...");
-};
