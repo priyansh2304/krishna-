@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Surprise | Frame 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="frame3.css">
+</head>
+<body>
+
+    <!-- Canvas for the timed celebration confetti -->
+    <div id="confetti-canvas"></div>
+
+    <!-- BACKGROUND WRAPPER: Three-line cursive layout -->
+    <div id="bg-text-wrapper">
+        <h1 class="gift-birthday-wish" id="birthday-wish">
+            Happy Birthday<br>
+            to my dear<br>
+            Deevu!
+        </h1>
+    </div>
+
+    <!-- The 4 Corner Interactive Tilted Cards -->
+    <div class="corner-stage">
+        
+        <!-- Top Left Card -->
+        <div class="mystery-card top-left" id="tile-1" onclick="handleTileClick(1)">
+            <div class="tile-content">
+                <div class="tile-image-wrapper">
+                    <img src="photo1.jpg" alt="Memory 1">
+                </div>
+                <div class="tile-text-wrapper">
+                    <h3>Chapter I: The Spark</h3>
+                    <p>It all started here. Looking back at this exact moment, I had no clue how incredibly important you would become to me.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Right Card -->
+        <div class="mystery-card top-right" id="tile-2" onclick="handleTileClick(2)">
+            <div class="tile-content">
+                <div class="tile-image-wrapper">
+                    <img src="photo2.jpg" alt="Memory 2">
+                </div>
+                <div class="tile-text-wrapper">
+                    <h3>Chapter II: Chaotic Days</h3>
+                    <p>No matter how wild or completely upside down things got, you always brought this calm, grounding energy with you.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Left Card -->
+        <div class="mystery-card bottom-left" id="tile-3" onclick="handleTileClick(3)">
+            <div class="tile-content">
+                <div class="tile-image-wrapper">
+                    <img src="photo3.jpg" alt="Memory 3">
+                </div>
+                <div class="tile-text-wrapper">
+                    <h3>Chapter III: The Vault</h3>
+                    <p>A little piece of our universe. Standard words on a screen just don't cut it, so I built this space for you.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Right Card -->
+        <div class="mystery-card bottom-right" id="tile-4" onclick="handleTileClick(4)">
+            <div class="tile-content">
+                <div class="tile-image-wrapper">
+                    <img src="photo4.jpg" alt="Memory 4">
+                </div>
+                <div class="tile-text-wrapper">
+                    <h3>Chapter IV: Eternal</h3>
+                    <p>Remember, no matter where the road goes or how fast time flies, I'm always right here in your corner.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Dim backdrop behind the focused card -->
+    <div id="focus-overlay" class="dark-overlay" onclick="closeActiveTile()"></div>
+
+    <!-- Master Button to advance to Frame 4 -->
+    <button id="next-frame-btn" class="gateway-button" onclick="goToFrame4()">Continue the Night →</button>
+
+    <script src="frame3.js"></script>
+</body>
+</html>

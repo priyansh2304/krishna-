@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #020205; /* Matches the absolute darkness of Frame 4's exit */
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.final-container {
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    
+    /* Elegant fade-in transition when the page loads */
+    opacity: 0;
+    animation: smoothPresence 3.5s ease-out forwards;
+    animation-delay: 1s; /* Tiny beat of absolute darkness before appearing */
+}
+
+/* Premium cursive layout matching the inner scroll vibe */
+.final-message {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.45rem;
+    line-height: 1.8;
+    color: #f4ebd0; /* Soft, warm antique ivory */
+    text-shadow: 0 0 20px rgba(244, 235, 208, 0.15);
+}
+
+/* THE SHINING HEART: Pulsing and glowing engine */
+.shining-heart {
+    font-size: 2.5rem;
+    cursor: default;
+    user-select: none;
+    filter: drop-shadow(0 0 8px rgba(255, 105, 180, 0.4));
+    animation: heartShine 2.2s ease-in-out infinite;
+}
+
+/* ANIMATION KEYFRAMES */
+@keyframes smoothPresence {
+    0% {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes heartShine {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 5px rgba(255, 105, 180, 0.4)) brightness(1);
+    }
+    50% {
+        transform: scale(1.12);
+        /* Creates the sparkling/shining surge effect */
+        filter: drop-shadow(0 0 25px rgba(255, 20, 147, 0.95)) brightness(1.3);
+    }
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 5px rgba(255, 105, 180, 0.4)) brightness(1);
+    }
+}
+
+/* Responsive scale down for compact mobile screens */
+@media (max-width: 480px) {
+    .final-message {
+        font-size: 1.2rem;
+        line-height: 1.7;
+    }
+    .shining-heart {
+        font-size: 2.2rem;
+    }
+}

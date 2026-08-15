@@ -1,0 +1,188 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #020205;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.galaxy-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+}
+
+.dust-particle {
+    position: absolute;
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    opacity: 0.3;
+    mix-blend-mode: screen;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
+}
+
+/* THE STAGE LAYOUT */
+.stage-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    padding: 10vh 8vw 6vh 8vw; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Lanes prevent layout cross-contamination */
+.scroll-lane {
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+.lane-left { justify-content: flex-start; }
+.lane-right { justify-content: flex-end; }
+
+/* THE SCROLL OBJECT */
+.scroll-wrapper {
+    position: relative;
+    width: 75px; /* FIXED: Increased thickness of the closed state */
+    height: 160px; 
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    /* FIXED: Slowed down the unrolling speed to 1.4s */
+    transition: width 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* The Vertical Wooden Rollers */
+.scroll-roller {
+    position: absolute;
+    width: 16px; /* Slightly thicker wooden poles to match the new size */
+    height: 100%;
+    background: linear-gradient(180deg, #2e1a08, #5c3a21, #2e1a08);
+    border-radius: 4px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.4);
+    z-index: 5;
+    /* FIXED: Matches the 1.4s unrolling speed */
+    transition: left 1.4s cubic-bezier(0.25, 1, 0.5, 1), right 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Handle Placements for Left-Aligned Scrolls (Scroll 1 & 3) */
+.lane-left .left-pole { left: 0; }
+.lane-left .right-pole { left: 0; } 
+
+/* Handle Placements for Right-Aligned Scroll (Scroll 2) */
+.lane-right .left-pole { right: 0; }
+.lane-right .right-pole { right: 0; }
+
+/* The Floating Chapter Labels */
+.scroll-label {
+    position: absolute;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    color: #00f0ff;
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+    white-space: nowrap;
+    transition: opacity 0.4s ease;
+    z-index: 6;
+}
+.lane-left .scroll-label { left: 95px; }
+.lane-right .scroll-label { right: 95px; }
+
+/* THE PARCHMENT PAPER */
+.scroll-paper {
+    height: 90%; 
+    width: 0; 
+    background: #f4ebd0;
+    box-shadow: inset 0 0 20px rgba(184, 154, 108, 0.6), 0 5px 15px rgba(0,0,0,0.4);
+    overflow: hidden; 
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* FIXED: Matches the 1.4s unrolling speed */
+    transition: width 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.lane-left .scroll-paper { left: 8px; }
+.lane-right .scroll-paper { right: 8px; }
+
+/* The Paper Text */
+.scroll-text {
+    min-width: 260px; 
+    max-width: 380px;
+    padding: 0 25px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #231911;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* ==========================================================================
+   OPENED SCROLL STATES
+   ========================================================================== */
+.scroll-wrapper.scroll-open {
+    width: 420px; 
+}
+
+@media (max-width: 500px) {
+    .scroll-wrapper.scroll-open { width: 84vw; } 
+}
+
+/* Unrolling Animations for Left Scrolls (Opens Left to Right) */
+.lane-left .scroll-wrapper.scroll-open .right-pole {
+    left: calc(100% - 16px); 
+}
+.lane-left .scroll-wrapper.scroll-open .scroll-paper {
+    width: calc(100% - 16px); 
+}
+
+/* FIXED: Unrolling Animations for Middle Scroll (Opens Right to Left) */
+.lane-right .scroll-wrapper.scroll-open .left-pole {
+    right: calc(100% - 16px); 
+}
+.lane-right .scroll-wrapper.scroll-open .scroll-paper {
+    width: calc(100% - 16px); 
+}
+
+.scroll-wrapper.scroll-open .scroll-label {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* FINALE OUTRO ACCENT */
+#final-outro {
+    text-align: center;
+    margin-top: 2vh;
+    transition: opacity 1.5s ease;
+}
+
+.close-phrase {
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #00f0ff;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+    cursor: pointer;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.close-phrase:hover {
+    color: #b085ff;
+    text-shadow: 0 0 15px rgba(176, 133, 255, 0.6);
+}
+
+.hidden-outro { opacity: 0; pointer-events: none; }
+.visible-outro { opacity: 0.8; pointer-events: all; }

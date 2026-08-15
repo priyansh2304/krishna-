@@ -1,0 +1,120 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0a0a1a;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    animation: fadeInPage 1.5s ease-in-out;
+}
+
+@keyframes fadeInPage {
+    from{ opacity: 0; filter: blur(10px);}
+    to{ opacity: 1; filter: blur(0px);}
+}
+
+.vault-container {
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+}
+
+.terminal-title {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.5rem;
+    color: #00ffcc;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+}
+
+.instruction {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 30px;
+}
+
+.glass-box {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.question-label {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #efefef;
+}
+
+input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #444;
+    padding: 12px;
+    border-radius: 8px;
+    color: #ffd700;
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    outline: none;
+    transition: border 0.3s;
+}
+
+input:focus {
+    border-color: #00ffcc;
+}
+
+#verifyBtn {
+    width: 100%;
+    padding: 12px;
+    background: #00ffcc;
+    color: #0a0a1a;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+#verifyBtn:active {
+    transform: scale(0.95);
+}
+
+.error-text {
+    color: #ff4d4d;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    display: none; /* Hidden by default */
+}
+
+.success-reveal {
+    display: none;
+    margin-top: 20px;
+    color: #00ffcc;
+    animation: fadeIn 1s ease;
+}
+
+.unlock-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.fade-out {
+    opacity: 0;
+    filter: blur(20px) !important;
+    transition: all 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

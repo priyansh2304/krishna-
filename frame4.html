@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Scroll Ladder | Frame 4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Cinzel:wght@500&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="frame4.css">
+</head>
+<body>
+
+    <div class="galaxy-bg" id="canvas-container"></div>
+
+    <div class="stage-container">
+        
+        <!-- Scroll 1 Container -->
+        <div class="scroll-lane lane-left">
+            <div class="scroll-wrapper" id="scroll-wrapper-1" onclick="toggleScroll(1)">
+                <div class="scroll-roller left-pole"></div>
+                <div class="scroll-paper">
+                    <p class="scroll-text">Looking back at everything since 2025, it’s wild how the best moments always seem to center around you. You have this effortless way of bringing grounding energy into a completely chaotic world.</p>
+                </div>
+                <div class="scroll-roller right-pole"></div>
+                <div class="scroll-label">Chapter I</div>
+            </div>
+        </div>
+
+        <!-- Scroll 2 Container -->
+        <div class="scroll-lane lane-right">
+            <div class="scroll-wrapper" id="scroll-wrapper-2" onclick="toggleScroll(2)">
+                <div class="scroll-roller left-pole"></div>
+                <div class="scroll-paper">
+                    <p class="scroll-text">I wanted to create this little digital universe for you because standard words on a screen just didn't feel deep enough to capture how much your presence truly matters to me.</p>
+                </div>
+                <div class="scroll-roller right-pole"></div>
+                <div class="scroll-label">Chapter II</div>
+            </div>
+        </div>
+
+        <!-- Scroll 3 Container -->
+        <div class="scroll-lane lane-left">
+            <div class="scroll-wrapper" id="scroll-wrapper-3" onclick="toggleScroll(3)">
+                <div class="scroll-roller left-pole"></div>
+                <div class="scroll-paper">
+                    <p class="scroll-text">As you step into this next year, I hope it brings you the exact kind of happiness, peace, and magic you constantly give to everyone else around you without even trying. Happy Birthday, Madam ji.</p>
+                </div>
+                <div class="scroll-roller right-pole"></div>
+                <div class="scroll-label">Chapter III</div>
+            </div>
+        </div>
+
+        <div id="final-outro" class="hidden-outro">
+            <span class="close-phrase" onclick="closeTheNight()">[ close the night ]</span>
+        </div>
+
+    </div>
+
+    <script src="frame4.js"></script>
+</body>
+</html>

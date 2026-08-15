@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to my</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="frame1.css">
+</head>
+<body>
+
+    <div class="vault-container">
+        <h1 class="terminal-title">SECURITY CHALLENGE</h1>
+        <p class="instruction">The wait is over. The upgrade is complete. To initialize the 2026 Celebration, please verify your identity.</p>
+        
+        <div class="glass-box">
+            <!-- QUESTION SECTION: You can change this text in the HTML whenever you like -->
+            <label for="answerInput" class="question-label">What's the song we both love?</label>
+            
+            <input type="text" id="answerInput" placeholder="Enter the secret answer..." autocomplete="off">
+            
+            <div id="error-msg" class="error-text">Access Denied. Try again.</div>
+            
+            <button id="verifyBtn" onclick="checkAccess()">Verify Identity</button>
+        </div>
+        
+        <div id="success-msg" class="success-reveal">
+            <span class="unlock-icon">🔓</span>
+            <p>IDENTITY CONFIRMED. ACCESS GRANTED.</p>
+        </div>
+    </div>
+
+    <script src="frame1.js"></script>
+</body>
+</html>

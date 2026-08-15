@@ -1,0 +1,315 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #020205;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    -webkit-tap-highlight-color: transparent; /* Clean touch feedback for mobile */
+}
+
+/* 1. INITIAL SYSTEM & TEXT POPUP ENGINE */
+#bg-text-wrapper {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5vw;
+    z-index: 2;
+    transition: filter 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
+}
+
+/* OVERSIZED TYPOGRAPHY: Massive screen coverage */
+.gift-birthday-wish {
+    font-family: 'Great Vibes', cursive;
+    font-size: 11vw; /* Fluid scale that expands to dominate the viewport width */
+    color: #ff69b4;
+    text-align: center;
+    line-height: 1.2;
+    width: 100%;
+    word-wrap: break-word;
+    
+    /* Blazing initial celebration glow */
+    text-shadow: 0 0 25px #ff69b4, 0 0 50px #ff1493, 0 0 100px rgba(255, 20, 147, 0.5);
+    
+    opacity: 0;
+    transform: scale(0.6);
+    animation: brilliantPop 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.2) forwards;
+    animation-delay: 0.4s;
+}
+
+@keyframes brilliantPop {
+    0% { opacity: 0; transform: scale(0.6); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Softens to an elegant background backdrop when cards arrive */
+.gift-birthday-wish.dimmed-glow {
+    opacity: 0.22;
+    text-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
+    transition: all 2s ease-in-out;
+}
+
+/* 2. CELEBRATION CONFETTI */
+#confetti-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 10;
+    pointer-events: none;
+    transition: opacity 2s ease;
+}
+.confetti-piece {
+    position: absolute;
+    width: 6px; height: 12px;
+    border-radius: 2px;
+    animation: dropFall linear forwards;
+}
+@keyframes dropFall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(105vh) rotate(540deg); opacity: 0; }
+}
+
+/* 3. THE ADAPTIVE CORNER CARDS (System-relative spacing and sizing) */
+.corner-stage {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.mystery-card {
+    position: absolute;
+    width: 28vw;   /* Responsive scaling width based on screen size */
+    height: 38vh;  /* Responsive scaling height based on screen size */
+    min-width: 105px;  /* Safety floor for ultra-small screens */
+    min-height: 165px;
+    max-width: 160px;  /* Safety ceiling for tablet/desktop screens */
+    max-height: 245px;
+    
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 16px;
+    cursor: pointer;
+    pointer-events: all;
+    overflow: hidden;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    
+    /* Elite transition matrix handling fly-ins, straightening, and scaling */
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+                width 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+                height 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.8s ease,
+                background 0.5s ease,
+                border-color 0.5s ease;
+}
+
+.mystery-card.visible-resting {
+    opacity: 1;
+}
+
+/* Intelligent corner positions utilizing percentages to avoid cutting off on mobile */
+.top-left { 
+    top: 10%; left: 8%; 
+    transform: rotate(-8deg);
+}
+.top-right { 
+    top: 10%; right: 8%; 
+    transform: rotate(6deg);
+}
+.bottom-left { 
+    bottom: 12%; left: 8%; 
+    transform: rotate(-5deg);
+}
+.bottom-right { 
+    bottom: 12%; right: 8%; 
+    transform: rotate(9deg);
+}
+
+/* UNLOCKED MEMORY COLOR STATE */
+.mystery-card.unlocked-state {
+    background: rgba(139, 90, 43, 0.08);
+    border-color: rgba(160, 110, 65, 0.35);
+    box-shadow: 0 8px 24px rgba(139, 90, 43, 0.35);
+}
+
+/* 4. THE SYSTEM ADAPTIVE CONTENT DATA (Reveals elegantly in center) */
+/*
+.tile-content {
+    width: 100%; height: 100%;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.tile-image-wrapper {
+    width: 100%; height: 55%;
+    overflow: hidden;
+}
+.tile-image-wrapper img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+
+.tile-text-wrapper {
+    width: 100%; height: 45%;
+    background: #09090e;
+    padding: 5%; /* Fluid inner padding scales to fit text text box smoothly 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+*/
+/* 4. THE SYSTEM ADAPTIVE CONTENT DATA */
+.tile-content {
+    width: 100%; height: 100%;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.tile-image-wrapper {
+    width: 100%; 
+    height: 60%; /* Gives the photo slightly more presence */
+    overflow: hidden;
+    background: #000000; /* Clean dark fill for non-matching aspect ratios */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tile-image-wrapper img {
+    width: 100%; 
+    height: 100%;
+    object-fit: contain; /* Displays the full image without cropping */
+    display: block;
+}
+
+.tile-text-wrapper {
+    width: 100%; 
+    height: 40%;
+    background: #09090e;
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.tile-text-wrapper h3 {
+    font-size: 1.1rem;
+    color: #ff69b4;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+.tile-text-wrapper p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #e2e2e9;
+}
+
+.mystery-card.dimmed-out {
+    opacity: 0.12 !important;
+    filter: blur(3px);
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   THE POWERFUL CENTER SPOTLIGHT (Adaptive Center Modal Card)
+   ========================================================================== */
+.mystery-card.active-spotlight {
+    top: 50% !important;
+    left: 50% !important;
+    bottom: auto !important;
+    right: auto !important;
+    
+    /* OVERRIDES ALL ROTATIONS: Flies perfectly straight (0deg) to the dead center */
+    transform: translate(-50%, -50%) rotate(0deg) scale(1) !important;
+    
+    /* Beautifully adapts sizing to the user's specific screen dimensions */
+    width: 86vw;
+    height: 64vh;
+    max-width: 330px;  /* Keeps it crisp and elegant on larger screens/tablets */
+    max-height: 470px;
+    
+    background: #000000 !important;
+    border-color: 1px solid rgba(255, 255, 255, 0.65) !important;
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.25), 0 0 60px rgba(255, 20, 45, 0.3), 0 30px 70px rgba(0, 0, 0, 0.95) !important;
+    z-index: 100;
+}
+
+.mystery-card.active-spotlight .tile-content {
+    opacity: 1;
+    transition-delay: 0.35s; /* Smooth visual reveal right as card slide finishes */
+    pointer-events: all;
+}
+
+/* TARGET MASK FOR THE GIANT BACKGROUND TYPOGRAPHY BLUR */
+.bg-blur-active { 
+    filter: blur(12px); /* Deep blur makes the huge text look like a warm glowing cloud */
+    opacity: 0.25; 
+}
+
+.dark-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(2, 2, 5, 0.45);
+    z-index: 80;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+.dark-overlay.show-overlay { opacity: 1; pointer-events: all; }
+
+/* THE FINAL SYSTEM DISCOVERY LINK GATEWAY BUTTON */
+.gateway-button {
+    position: absolute;
+    bottom: 6vh;
+    left: 50%;
+    transform: translateX(-50%);
+    background: none;
+    border: 1px solid #ff69b4;
+    color: #ff69b4;
+    padding: 12px 36px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 30px;
+    cursor: pointer;
+    z-index: 15;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.6s ease;
+}
+.gateway-button.visible {
+    opacity: 1;
+    pointer-events: all;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.25);
+}
+.gateway-button:hover {
+    background: #ff69b4;
+    color: #020205;
+}
+
+/* Media query scales down large typography on small mobile screens to keep it in 3 clean lines */
+@media (max-width: 480px) {
+    .gift-birthday-wish { font-size: 13vw; line-height: 1.25; }
+    .tile-text-wrapper h3 { font-size: 1rem; }
+    .tile-text-wrapper p { font-size: 0.82rem; line-height: 1.4; }
+}
