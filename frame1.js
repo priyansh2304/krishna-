@@ -5,9 +5,7 @@ function checkAccess() {
     const glassBox = document.querySelector(".glass-box");
 
     // SET YOUR SECRET ANSWER HERE
-    // can be changed - just put the answer inside the quotes
     const correctSecret = "tu chaiye";
-    
     
     if (userInput.toLowerCase().trim() === correctSecret.toLowerCase()) {
         // SUCCESS
@@ -15,13 +13,17 @@ function checkAccess() {
         glassBox.style.display = "none"; // Hide the input box
         successMsg.style.display = "block"; // Show the success message
 
-    setTimeout (() => {
-        document.body.classList.add("fade-out");
+        // 🎵 Initialize background music state for Frame 2 & 3
+        localStorage.setItem("isMusicPlaying", "true");
+        localStorage.setItem("musicCurrentTime", "0");
 
-        setTimeout (() => {
-            window.location.href = "frame2.html";
-        }, 1000);
-    }, 1500);
+        setTimeout(() => {
+            document.body.classList.add("fade-out");
+
+            setTimeout(() => {
+                window.location.href = "frame2.html";
+            }, 1000);
+        }, 1500);
 
     } else {
         // FAIL
